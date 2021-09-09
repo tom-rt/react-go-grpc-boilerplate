@@ -1,5 +1,15 @@
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Input, Output } from "./pbs/base_pb"
+import { BaseService } from "./pbs/base_pb_service"
+
+const input = new Input();
+const output = new Output();
+input.setInput("input value");
+output.setOutput("output value");
+
+const client = new BaseService()
 
 function App() {
   return (
@@ -7,7 +17,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <a
           className="App-link"

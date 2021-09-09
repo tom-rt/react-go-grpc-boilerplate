@@ -7,7 +7,7 @@ import (
 	"log"
 	"net"
 
-	userpb "rakoon/rakoon-reborn/user/pbs"
+	basepb "boilerplate/go-grpc/base/pbs"
 
 	"google.golang.org/grpc"
 )
@@ -20,19 +20,19 @@ var (
 	port       = flag.Int("port", 10000, "The server port")
 )
 
-type userServiceServer struct {
-	userpb.UnimplementedUserServiceServer
+type baseServiceServer struct {
+	basepb.UnimplementedBaseServiceServer
 }
 
 // GetFeature returns the feature at the given point.
-func (s *userServiceServer) SayHello(ctx context.Context, point *userpb.Input) (*userpb.Output, error) {
+func (s *baseServiceServer) SayHello(ctx context.Context, point *basepb.Input) (*basepb.Output, error) {
 	fmt.Println("HELLO")
-	return &userpb.Output{Output: "Hello From the Server!"}, nil
+	return &basepb.Output{Output: "Hello From the Server!"}, nil
 }
 
-func newServer() *userServiceServer {
+func newServer() *baseServiceServer {
 	// s := &userServiceServer{routeNotes: make(map[string][]*pb.RouteNote)}
-	s := &userServiceServer{}
+	s := &baseServiceServer{}
 	// s.loadFeatures(*jsonDBFile)
 	return s
 }
@@ -46,6 +46,6 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
-	userpb.RegisterUserServiceServer(grpcServer, newServer())
+	basepb.RegisterBaseServiceServer(grpcServer, newServer())
 	grpcServer.Serve(lis)
 }

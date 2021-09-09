@@ -1,4 +1,4 @@
-module rakoon/rakoon-reborn
+module boilerplate/go-grpc
 
 go 1.16
 

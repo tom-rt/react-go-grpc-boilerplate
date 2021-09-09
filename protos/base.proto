@@ -1,18 +1,18 @@
 syntax = "proto3";
 
-option go_package = "/user/pbs";
+option go_package = "/base/pbs";
 
-package user;
+package base;
 
 // Interface exported by the server.
-service UserService {
-  // A simple RPC.
+service BaseService {
+  // A simple unary RPC.
   //
   // Obtains the feature at a given position.
   //
   // A feature with an empty name is returned if there's no feature at the given
   // position.
-  rpc SayHello(Input) returns (Output) {}
+  rpc Ping(Input) returns (Output) {}
 }
 
 // Points are represented as latitude-longitude pairs in the E7 representation
