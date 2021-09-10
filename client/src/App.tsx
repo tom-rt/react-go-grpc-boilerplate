@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Input, Output } from "./pbs/base_pb"
+import { BaseServiceClient } from './pbs/base_pb_service';
 import { BaseService } from "./pbs/base_pb_service"
 
 const input = new Input();
@@ -9,25 +9,19 @@ const output = new Output();
 input.setInput("input value");
 output.setOutput("output value");
 
-const client = new BaseService()
+const client = new BaseServiceClient('http://localhost:8000')
 
 function App() {
+
+    let request = new Input();
+
+    let stream = client.ping(request, (resp) => {
+      console.log(resp)
+    });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Hello !
     </div>
   );
 }
