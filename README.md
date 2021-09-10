@@ -13,6 +13,15 @@ cd client
 npm install ts-protoc-gen
 npm install grpc-web
 npm install google-protobuf
+npm install @improbable-eng/grpc-web
+
+Add `
+    "ignorePatterns": [
+      "**/*_pb.js"
+    ]
+`
+To "eslintConfig" in your package.json
+
 npm start
 # PROTOS
 
