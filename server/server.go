@@ -25,7 +25,7 @@ type baseServiceServer struct {
 }
 
 // GetFeature returns the feature at the given point.
-func (s *baseServiceServer) SayHello(ctx context.Context, point *basepb.Input) (*basepb.Output, error) {
+func (s *baseServiceServer) Ping(ctx context.Context, point *basepb.Input) (*basepb.Output, error) {
 	fmt.Println("HELLO")
 	return &basepb.Output{Output: "Hello From the Server!"}, nil
 }
