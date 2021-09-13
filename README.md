@@ -4,6 +4,8 @@ https://medium.com/swlh/building-a-realtime-dashboard-with-reactjs-go-grpc-and-e
 # PROXY
 docker build -t grpc-envoy:1.0 .
 docker run --network=host grpc-envoy:1.0
+docker run --network=host grpc-envoy:1.0 -p 8080:8080 -p 8000:8000
+envoy -c envoy.yaml
 # SERVER
 go get .
 go run server.go -port=8080
