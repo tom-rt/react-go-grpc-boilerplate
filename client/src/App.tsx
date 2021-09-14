@@ -10,10 +10,9 @@ const output = new Output();
 input.setInput("input value");
 output.setOutput("output value");
 
-const client = new BaseServiceClient('http://localhost:8000')
-
 function App() {
 
+    const client = new BaseServiceClient('http://localhost:8000')
     let request = new Input();
     const metadata: grpc.Metadata = new grpc.Metadata();
 
@@ -24,7 +23,8 @@ function App() {
     // metadata.
     // metadata.set('Access-Control-Allow-Origin', '*')
 
-    let stream = client.ping(request, metadata, (resp) => {
+    // client.serviceHost
+    let stream = client.ping(request, (resp) => {
       console.log("resp", resp)
     });
 
