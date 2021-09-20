@@ -1,21 +1,19 @@
-Inspired by:
-https://medium.com/swlh/building-a-realtime-dashboard-with-reactjs-go-grpc-and-envoy-7be155dfabfb
-
 # PROXY
+## Using docker: 
 docker build -t grpc-envoy:1.0 .
 docker run --network=host grpc-envoy:1.0
-docker run --network=host grpc-envoy:1.0 -p 8080:8080 -p 8000:8000
+
+## Without docker: 
 envoy -c envoy.yaml
 # SERVER
 go get .
-go run server.go -port=8080
+go run server.go
 # CLIENT
-npx create-react-app client --template typescript
-cd client
 npm install ts-protoc-gen
 npm install grpc-web
 npm install google-protobuf
 npm install @improbable-eng/grpc-web
+npm install
 
 Add `
     "ignorePatterns": [
@@ -28,7 +26,7 @@ npm start
 # PROTOS
 
 cd protos
-## Client:
+## Client generation:
 PROTOC_GEN_TS_PATH="../client/node_modules/.bin/protoc-gen-ts"
 OUT_DIR="../client/src/pbs"
 ### models:
