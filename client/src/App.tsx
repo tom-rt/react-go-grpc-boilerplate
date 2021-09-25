@@ -1,32 +1,47 @@
 import { grpc } from '@improbable-eng/grpc-web';
-import React from 'react';
 import './App.css';
 import { Input, Output } from "./pbs/base_pb"
-import { BaseServiceClient } from './pbs/base_pb_service';
-import { BaseService } from "./pbs/base_pb_service"
+import { BaseServiceClient, ServiceError } from './pbs/base_pb_service';
+import React from 'react'
 
-const input = new Input();
-const output = new Output();
-input.setInput("input value");
-output.setOutput("output value");
+class App extends React.Component {
+  constructor(props: any) {
+    super(props)
+    this.state = {}
+  }
 
-function App() {
-
+  async pingServer() {
     const client = new BaseServiceClient('http://localhost:8000')
-    let request = new Input();
+    const request = new Input();
     const metadata: grpc.Metadata = new grpc.Metadata();
 
     metadata.append("Access-Control-Allow-Origin", "*")
-
-    let stream = client.ping(request, (resp) => {
-      console.log("resp", resp)
+    request.setInput("Ping")
+    
+    await client.ping(request, (error: ServiceError | null, res: Output | null) => {
+      if (error) {
+        console.error(`Error ${error.code}: ${error.message}`)
+      } else {
+        const output: string | undefined = res?.getOutput()
+        console.log("Server responded:", output)  
+      }
     });
+  }
 
-  return (
-    <div className="App">
-      Ping rpc has been sent !
-    </div>
-  );
+  componentDidMount() { 
+    this.pingServer()
+  }
+
+  componentWillUnmount() {  }
+
+  render() {
+    return (
+      <div className="App">
+        Ping rpc example !
+      </div>
+    );
+  }
+
 }
 
 export default App;
