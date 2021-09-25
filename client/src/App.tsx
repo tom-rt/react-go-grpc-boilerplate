@@ -17,20 +17,14 @@ function App() {
     const metadata: grpc.Metadata = new grpc.Metadata();
 
     metadata.append("Access-Control-Allow-Origin", "*")
-    // metadata.set("Access-Control-Allow-Origin", "*")
-    // metadata.append("hellotest", "hello")
-    // metadata.set("hellotest", "hello")
-    // metadata.
-    // metadata.set('Access-Control-Allow-Origin', '*')
 
-    // client.serviceHost
     let stream = client.ping(request, (resp) => {
       console.log("resp", resp)
     });
 
   return (
     <div className="App">
-      Hello !
+      Ping rpc has been sent !
     </div>
   );
 }

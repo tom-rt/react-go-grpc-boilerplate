@@ -9,7 +9,7 @@ type BaseServiceServer struct {
 	basepb.UnimplementedBaseServiceServer
 }
 
-// GetFeature returns the feature at the given point.
+// Basic ping function
 func (s BaseServiceServer) Ping(ctx context.Context, point *basepb.Input) (*basepb.Output, error) {
 	return &basepb.Output{Output: "Hello From the Server!"}, nil
 }

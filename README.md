@@ -1,3 +1,9 @@
+# How does it work ?
+
+The architecture is pretty simple:
+
+React app  <- http1 ->  envoy  <- hhtp 2 -> Go server
+
 # PROXY
 ## Using docker: 
 docker build -t grpc-envoy:1.0 .
